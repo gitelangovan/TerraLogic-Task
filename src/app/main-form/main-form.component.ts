@@ -35,6 +35,7 @@ export class MainFormComponent implements OnInit {
   isFrontEndChecked = [false];
   isBackEndChecked = [false];
   isFullStackChecked = [false];
+  fetchError: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private mockService: MockServiceService) { }
 
@@ -62,14 +63,14 @@ export class MainFormComponent implements OnInit {
   applicationDetails1(data: any, index: any): FormGroup {
     this.checkBox1(data.domain, index);
     return this.formBuilder.group({
-      firstName: new FormControl({ disabled: false, value: data.firstName }),
+      firstName: new FormControl({ disabled: false, value: data.firstName }, Validators.required),
       applicantId: new FormControl({ disabled: false, value: data.id }),
-      lastName: new FormControl({ disabled: false, value: data.lastName }),
-      email: new FormControl({ disabled: false, value: data.email }),
-      contact: new FormControl({ disabled: false, value: data.contact }),
-      domain: new FormControl({ disabled: false, value: data.domain, }),
-      gender: new FormControl({ disabled: false, value: data.gender }),
-      messageHr: new FormControl({ disabled: false, value: data.messageHr }),
+      lastName: new FormControl({ disabled: false, value: data.lastName }, Validators.required),
+      email: new FormControl({ disabled: false, value: data.email }, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      contact: new FormControl({ disabled: false, value: data.contact }, [Validators.required, Validators.minLength(8), Validators.maxLength(10)]),
+      domain: new FormControl({ disabled: false, value: data.domain, }, Validators.required),
+      gender: new FormControl({ disabled: false, value: data.gender }, Validators.required),
+      messageHr: new FormControl({ disabled: false, value: data.messageHr }, Validators.required),
       status: new FormControl({ disabled: false, value: data.status }),
     });
   }
@@ -176,7 +177,14 @@ export class MainFormComponent implements OnInit {
         this.getData = [value];
         this.itrApplicant(this.getData);
       },
-      error: (err) => this.fetchOneErrorGet = "Something went wrong, Please check with Different ID",
+      error: (err) => {
+        this.fetchError = true;
+        this.fetchOneErrorGet = "Something went wrong, Please check with Different ID";
+        setTimeout(() => {
+          this.fetchError = false;
+          this.fetchOneErrorGet = "";
+        }, 3000);
+      },
       complete: () => "Data Successfully Fetched"
     });
   }
@@ -202,6 +210,7 @@ export class MainFormComponent implements OnInit {
         },
         error: (error) => errorData = error,
         complete: () => {
+          this.fetchFunction = true;
           this.succesMsgValue = "Data successfully Added into DataBase";
           this.succesMsg = true
         }

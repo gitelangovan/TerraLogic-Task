@@ -7,7 +7,7 @@
                     <div class="form-group" [formGroupName]="i">
                         <!-- Form code starts here -->
                         <div class="row" style="font-weight: bold;justify-content: center;">
-                            <label for="Basicdetails" style="font-weight: bold;margin: 10px;font-size: 16px;">Applicant Details {{overAllControl().length ==1 ? '':i+1 }}</label>
+                            <label for="Basicdetails" style="font-weight: bold;margin: 10px;font-size: 16px;">Job Applicant Details {{overAllControl().length ==1 ? '':i+1 }}</label>
                         </div>
 
                         <div class="row" style="margin-top: 10px">
@@ -136,8 +136,8 @@
                             <div *ngIf="succesMsg" style="text-align: center;">
                                 <span style="color: green;">{{succesMsgValue}}</span>
                             </div>
-                            <div *ngIf="errorGet" style="text-align: center;">
-                                <span style="color: red;">{{errorGet}}</span>
+                            <div *ngIf="fetchError" style="text-align: center;">
+                                <span style="color: red;">{{fetchOneErrorGet}}</span>
                             </div>
                         </div>
                         
@@ -152,7 +152,7 @@
             </form>
 
             <!--  Fetch data -->
-            <div>
+            <div *ngIf="fetchFunction">
                 <div class="card-body">
                     <button class="form-control btn btn-primary" (click)="fetchData()">Fetch All Data</button>
                 </div>
