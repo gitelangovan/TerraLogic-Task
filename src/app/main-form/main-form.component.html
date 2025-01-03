@@ -1,0 +1,176 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="applicantForm" (ngSubmit)="submitData()">
+
+                <div formArrayName="appFromarray" *ngFor="let form of overAllControl(); let i = index">
+                    <div class="form-group" [formGroupName]="i">
+                        <!-- Form code starts here -->
+                        <div class="row" style="font-weight: bold;justify-content: center;">
+                            <label for="Basicdetails" style="font-weight: bold;margin: 10px;font-size: 16px;">Applicant Details {{overAllControl().length ==1 ? '':i+1 }}</label>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-md-6">
+                                <label for="clientname">First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name"
+                                    formControlName="firstName"
+                                    [ngClass]="{ 'is-invalid': submitted && form.get('firstName')?.errors }" />
+
+                                <div *ngIf="form.get('firstName').invalid && (form.get('firstName').touched || form.get('firstName').dirty || submitted)"
+                                    class="invalid-feedback">
+                                    <span *ngIf="form.get('firstName')?.errors?.required">First Name is Required</span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="clientname">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Last Name"
+                                    formControlName="lastName"
+                                    [ngClass]="{ 'is-invalid': submitted && form.get('lastName')?.errors }" />
+
+                                <div *ngIf="form.get('lastName').invalid && (form.get('lastName').touched || form.get('lastName').dirty || submitted)"
+                                    class="invalid-feedback">
+                                    <span *ngIf="form.get('lastName')?.errors?.required">Last Name is Required</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-md-6">
+                                <label for="clientname">Email Address</label>
+                                <input type="email" class="form-control" placeholder="Enter Valid Email Address"
+                                    formControlName="email"
+                                    [ngClass]="{ 'is-invalid': submitted && form.get('email')?.errors }" />
+
+                                <div *ngIf="form.get('email').invalid && (form.get('email').touched || form.get('email').dirty || submitted)"
+                                    class="invalid-feedback">
+                                    <span *ngIf="form.get('email')?.errors?.['required']">Email Address is
+                                        Required</span>
+                                    <span *ngIf="form.get('email')?.errors?.['pattern']">Enter Valid Address</span>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="contact">Contact Number</label>
+                                <input class="form-control" (keypress)="keyPressNumbers($event)"
+                                    placeholder="Enter Valid Contact Number" formControlName="contact" 
+                                    [ngClass]="{ 'is-invalid': submitted && form.get('contact')?.errors }" maxlength="11" minlength="10"/>
+
+                                    <div *ngIf="submitted && form.get('contact')?.errors" class="invalid-feedback">
+                                        <div *ngIf="form.get('contact')?.errors?.['required']">Contact number is required.</div>
+                                        <div *ngIf="form.get('contact')?.errors?.['minlength']">Minimum Length is 10</div>
+                                        <div *ngIf="form.get('contact')?.errors?.['maxlength']">Maximum length is 10</div>
+                                      </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 20px">
+                            <div class="col-md-6">
+                                <label for="clientname">Looking Domain</label>
+                                <div class="form-group">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="frontEnd" value="frontEnd" [checked]="isFrontEndChecked[i]" (change)="checkBox($event, 'frontEnd',i)"
+                                               > Front End
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="backEnd" value="backEnd" [checked]="isBackEndChecked[i]" (change)="checkBox($event, 'backEnd',i)"
+                                              > Back End
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="fullStack" value="fullStack" [checked]="isFullStackChecked[i]"  (change)="checkBox($event, 'fullStack',i)"
+                                               > Full Stack
+                                    </label>
+
+                                    <div style="font-size: 80%;color: #dc3545;" *ngIf="!isFrontEndChecked[i] && !isBackEndChecked[i] && !isFullStackChecked[i] && submitted">
+                                        At least one domain must be selected..!
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="clientname">Gender</label>
+                                <div class="form-group">
+                                    <label class="checkbox-inline">
+                                        <input type="radio" value="male" formControlName="gender"
+                                            [ngClass]="{ 'is-invalid': submitted && form.get('gender')?.errors }">Male
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" value="female" formControlName="gender"
+                                            [ngClass]="{ 'is-invalid': submitted && form.get('gender')?.errors }">Female
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" value="lg" formControlName="gender"
+                                            [ngClass]="{ 'is-invalid': submitted && form.get('gender')?.errors }">LGBTQ
+                                    </label>
+
+                                    <div style="font-size: 80%;color: #dc3545;" *ngIf="form.get('gender')?.errors?.required && submitted">
+                                        Gender is Required
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="clientname">Message to HR</label>
+                                <textarea name="message" id="appMessage" class="form-control"
+                                    formControlName="messageHr"
+                                    placeholder="Enter your remarkable message to Hiring Manager"
+                                    [ngClass]="{ 'is-invalid': submitted && form.get('messageHr')?.errors }"></textarea>
+
+                                <div *ngIf="form.get('messageHr').invalid && (form.get('messageHr').touched || form.get('messageHr').dirty || submitted)"
+                                    class="invalid-feedback">
+                                    <span *ngIf="form.get('messageHr')?.errors?.required">Message is Required</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1rem;">
+                            <div *ngIf="succesMsg" style="text-align: center;">
+                                <span style="color: green;">{{succesMsgValue}}</span>
+                            </div>
+                            <div *ngIf="errorGet" style="text-align: center;">
+                                <span style="color: red;">{{errorGet}}</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card-body d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success mx-2">Share to HR</button>
+                    <button type="reset" class="btn btn-primary mx-2" (click)="resetForm()">Reset Details</button>
+                </div>
+
+            </form>
+
+            <!--  Fetch data -->
+            <div>
+                <div class="card-body">
+                    <button class="form-control btn btn-primary" (click)="fetchData()">Fetch All Data</button>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Enter Your Known ID</label>
+                            <input type="text" class="form-control" #getData>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Click this button for One Data</label>
+                            <button class="form-control btn-success" (click)="fetchOneData(getData)">Fetch Date Based on
+                                ID</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
