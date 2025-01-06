@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MainForm } from '../models/main-form';
 import { MockServiceService } from '../services/mock-service.service';
-import { error } from 'console';
-import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-main-form',

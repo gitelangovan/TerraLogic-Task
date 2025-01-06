@@ -24,7 +24,6 @@ export class MockServiceService {
 
   // Fetch Based on the ID
   geOneData(id:any): Observable<any>{
-    debugger
     return this.http.get(this.apiUrl + '/' + id)
   }
 }

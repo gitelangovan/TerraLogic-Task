@@ -1,4 +1,92 @@
 {
   "applicantData": [
+    {
+      "id": "f38e",
+      "firstName": "Elangovan",
+      "lastName": "Mathan",
+      "email": "elangova@gmail.com",
+      "contact": "9500866068",
+      "domain": "frontEnd",
+      "gender": "male",
+      "messageHr": "Hello",
+      "status": "A"
+    },
+    {
+      "id": "43ab",
+      "firstName": "Sudha",
+      "lastName": "Prathi",
+      "email": "sudha@gmail.com",
+      "contact": "9994446662",
+      "domain": "fullStack",
+      "gender": "female",
+      "messageHr": "Hello",
+      "status": null
+    },
+    {
+      "id": "eedb",
+      "firstName": "Thaaranya",
+      "lastName": "E",
+      "email": "thaaru@gmail.com",
+      "contact": "9662632626",
+      "domain": "backEnd",
+      "gender": "female",
+      "messageHr": "Hi Manager",
+      "status": null
+    },
+    {
+      "id": "102f",
+      "firstName": "Kathir",
+      "lastName": "Mathan",
+      "email": "kathir@gmai.com",
+      "contact": "9500866068",
+      "domain": "frontEnd",
+      "gender": "male",
+      "messageHr": "Hello",
+      "status": "A"
+    },
+    {
+      "id": "c9f6",
+      "firstName": "Jammy",
+      "lastName": "Sark",
+      "email": "jammy@out",
+      "contact": null,
+      "domain": null,
+      "gender": null,
+      "messageHr": null,
+      "status": null
+    },
+    {
+      "id": "25d6",
+      "firstName": "Gopi",
+      "lastName": "M",
+      "email": "gopi@gmail.com",
+      "contact": "9500866068",
+      "domain": "backEnd",
+      "gender": "male",
+      "messageHr": "Hello",
+      "status": "A"
+    },
+    {
+      "id": "2749",
+      "firstName": "rita",
+      "lastName": "t",
+      "email": "gfhhj@gmail.com",
+      "contact": "5163465296",
+      "domain": "frontEnd",
+      "gender": "lg",
+      "messageHr": "hj",
+      "status": "A"
+    },
+    {
+      "id": "bcfd",
+      "firstName": "rita",
+      "lastName": "t",
+      "email": "gfhhj@gmail.com",
+      "contact": "5163465296",
+      "domain": "frontEnd",
+      "gender": "lg",
+      "messageHr": "hj",
+      "status": "A"
+    }
   ]
 }
